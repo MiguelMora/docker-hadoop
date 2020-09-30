@@ -16,7 +16,8 @@ services:
       - ./hadoop.env
 
   datanode:
-    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    #image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    build: ./datanode  
     container_name: datanode
     restart: always
     volumes:
@@ -54,7 +55,15 @@ services:
       - hadoop_historyserver:/hadoop/yarn/timeline
     env_file:
       - ./hadoop.env
-  
+
+  cli: 
+    image: bde2020/hadoop-base:2.0.0-hadoop3.2.1-java8
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - .:/opt/hadoop/applications/cli 
+    working_dir: /opt/hadoop/applications/cli
+    command: bash 
 volumes:
   hadoop_namenode:
   hadoop_datanode:

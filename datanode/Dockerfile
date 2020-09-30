@@ -11,6 +11,8 @@ VOLUME /hadoop/dfs/data
 ADD run.sh /run.sh
 RUN chmod a+x /run.sh
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get update && apt-get install -y nodejs
 EXPOSE 9864
 
 CMD ["/run.sh"]
